@@ -64,10 +64,7 @@ class mod_sudoku_mod_form extends moodleform_mod {
         //-------------------------------------------------------------------------------
         // Adding the rest of sudoku settings, spreeading all them into this fieldset
         // or adding more fieldsets ('header' elements) if needed for better logic
-        $mform->addElement('static', 'label1', 'sudokusetting1', 'Your sudoku fields go here. Replace me!');
-
-        $mform->addElement('header', 'sudokufieldset', get_string('sudokufieldset', 'sudoku'));
-        $mform->addElement('static', 'label2', 'sudokusetting2', 'Your sudoku fields go here. Replace me!');
+        $mform->addElement('text', 'representation', get_string('representation', 'sudoku'), array('size'=>'81'));
 
         //-------------------------------------------------------------------------------
         // add standard elements, common to all modules

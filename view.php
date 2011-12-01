@@ -27,10 +27,13 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-/// (Replace sudoku with the name of your module and remove this line)
+//require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
+//require_once(dirname(__FILE__).'/lib.php');
 
-require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
-require_once(dirname(__FILE__).'/lib.php');
+// Since we're using symlinks
+require_once(dirname(dirname(dirname($_SERVER["SCRIPT_FILENAME"]))).'/config.php');
+require_once(dirname($_SERVER["SCRIPT_FILENAME"]).'/lib.php');
+
 
 $id = optional_param('id', 0, PARAM_INT); // course_module ID, or
 $n  = optional_param('n', 0, PARAM_INT);  // sudoku instance ID - it should be named as the first character of the module
