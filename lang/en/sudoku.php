@@ -30,12 +30,14 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['modulename'] = 'sudoku';
-$string['modulenameplural'] = 'sudokus';
+$string['modulename'] = 'Sudoku';
+$string['modulenameplural'] = 'Sudoku Puzzles';
 $string['modulename_help'] = 'Use the sudoku module for... | The sudoku module allows...';
 $string['sudokufieldset'] = 'Custom example fieldset';
-$string['sudokuname'] = 'sudoku name';
+$string['sudokuname'] = 'Sudoku Name';
 $string['sudokuname_help'] = 'This is the content of the help tooltip associated with the sudokuname field. Markdown syntax is supported.';
 $string['sudoku'] = 'sudoku';
 $string['pluginadministration'] = 'sudoku administration';
 $string['pluginname'] = 'sudoku';
+
+$string['representation'] = 'Puzzle Code';
