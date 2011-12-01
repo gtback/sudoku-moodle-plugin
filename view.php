@@ -36,14 +36,14 @@ require_once(dirname($_SERVER["SCRIPT_FILENAME"]).'/lib.php');
 
 
 $id = optional_param('id', 0, PARAM_INT); // course_module ID, or
-$n  = optional_param('n', 0, PARAM_INT);  // sudoku instance ID - it should be named as the first character of the module
+$s  = optional_param('s', 0, PARAM_INT);  // sudoku instance ID - it should be named as the first character of the module
 
 if ($id) {
     $cm         = get_coursemodule_from_id('sudoku', $id, 0, false, MUST_EXIST);
     $course     = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
     $sudoku  = $DB->get_record('sudoku', array('id' => $cm->instance), '*', MUST_EXIST);
-} elseif ($n) {
-    $sudoku  = $DB->get_record('sudoku', array('id' => $n), '*', MUST_EXIST);
+} elseif ($s) {
+    $sudoku  = $DB->get_record('sudoku', array('id' => $s), '*', MUST_EXIST);
     $course     = $DB->get_record('course', array('id' => $sudoku->course), '*', MUST_EXIST);
     $cm         = get_coursemodule_from_instance('sudoku', $sudoku->id, $course->id, false, MUST_EXIST);
 } else {
@@ -75,7 +75,37 @@ if ($sudoku->intro) { // Conditions to show the intro can change to look for own
 }
 
 // Replace the following lines with you own code
-echo $OUTPUT->heading('Yay! It works!');
+echo $OUTPUT->heading($sudoku->name);
+
+
+//NOT VERY MOODLE-like, and probably unsafe. Need to fix this.
+echo "\n<table>\n";
+$count = 0;
+for ($orow = 0; $orow < 3; $orow++)
+{
+    echo "\t<tr>\n";
+    for ($ocol = 0; $ocol < 3; $ocol++)
+    {
+        echo "\t\t<td style=\"border:2px solid black;margin:0px\"><table>\n";
+        for ($irow = 0; $irow < 3; $irow++)
+        {
+            echo "\t\t\t<tr>\n";
+            for ($icol = 0; $icol < 3; $icol++)
+            {
+                $char = $sudoku->representation[($orow * 3 + $irow) * 9 + ($ocol * 3 + $icol)];
+                if ($char == '0')
+                    $char = '&nbsp;';
+                echo "\t\t\t\t<td style=\"border:1px solid black;width:20px;height:20px;\">" . $char . "</td>\n";
+            }
+            echo "\t\t\t</tr>\n";
+        }
+        echo "\t\t</table></td>\n";
+    }
+    echo "\t</tr>\n";
+}
+echo "</table>\n";
+echo $OUTPUT->heading("Puzzle Code");
+echo $OUTPUT->heading($sudoku->representation);
 
 // Finish the page
 echo $OUTPUT->footer();
