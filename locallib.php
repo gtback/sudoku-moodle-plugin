@@ -57,7 +57,6 @@ function sudoku_start_puzzle($sudoku, $user)
     $record->sudoku_id = $sudoku->id;
     $record->userid = $user;
     $record->starttime = time();
-    $record->endtime = time(); //TODO: make this nullable
     $record->status = 0; //Incomplete
     $record->hints_used = 0;
     

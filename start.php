@@ -54,7 +54,7 @@ $PAGE->set_title(format_string($sudoku->name));
 $PAGE->set_heading(format_string($course->fullname));
 $PAGE->set_context($context);
 
-add_to_log($course->id, "sudoku", "start", $PAGE->url->out(), "$sudoku->id", $cm->id);
+add_to_log($course->id, "sudoku", "start", "view.php?id=" . $cm->id, "$sudoku->name", $cm->id);
 
 $attempt_id = sudoku_start_puzzle($sudoku, $USER->id);
 //DEBUG

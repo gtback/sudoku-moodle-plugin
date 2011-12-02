@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="mod/sudoku/db" VERSION="20111130" COMMENT="XMLDB file for Moodle mod/sudoku"
+<XMLDB PATH="mod/sudoku/db" VERSION="20111201" COMMENT="XMLDB file for Moodle mod/sudoku"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
@@ -28,7 +28,7 @@
         <FIELD NAME="sudoku_id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="id" NEXT="userid"/>
         <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="sudoku_id" NEXT="starttime"/>
         <FIELD NAME="starttime" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="userid" NEXT="endtime"/>
-        <FIELD NAME="endtime" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="starttime" NEXT="status"/>
+        <FIELD NAME="endtime" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" PREVIOUS="starttime" NEXT="status"/>
         <FIELD NAME="status" TYPE="int" LENGTH="4" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="endtime" NEXT="hints_used"/>
         <FIELD NAME="hints_used" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="status"/>
       </FIELDS>
