@@ -27,6 +27,18 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+/**
+ * Sukodu Status
+ * @global array $SUDOKU_STATUS
+ */
+global $SUDOKU_STATUS;
+$SUDOKU_STATUS = array (
+         "0" => "Incomplete",
+         "1" => "Correct",
+         "2" => "Incorrect",
+         "3" => "Abandoned",
+        );
+
 defined('MOODLE_INTERNAL') || die();
 
 /**
@@ -35,6 +47,19 @@ defined('MOODLE_INTERNAL') || die();
  * @param array $things
  * @return object
  */
-//function sudoku_do_something_useful(array $things) {
-//    return new stdClass();
-//}
+
+function sudoku_start_puzzle($sudoku, $user)
+{
+    global $DB;
+    global $SUDOKU_STATUS;
+
+    $record = new stdClass();
+    $record->sudoku_id = $sudoku->id;
+    $record->userid = $user;
+    $record->starttime = time();
+    $record->endtime = time(); //TODO: make this nullable
+    $record->status = 0; //Incomplete
+    $record->hints_used = 0;
+    
+    return $DB->insert_record("sudoku_attempt", $record, true);
+}

@@ -41,9 +41,9 @@ $s  = optional_param('s', 0, PARAM_INT);  // sudoku instance ID - it should be n
 if ($id) {
     $cm         = get_coursemodule_from_id('sudoku', $id, 0, false, MUST_EXIST);
     $course     = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
-    $sudoku  = $DB->get_record('sudoku', array('id' => $cm->instance), '*', MUST_EXIST);
+    $sudoku     = $DB->get_record('sudoku', array('id' => $cm->instance), '*', MUST_EXIST);
 } elseif ($s) {
-    $sudoku  = $DB->get_record('sudoku', array('id' => $s), '*', MUST_EXIST);
+    $sudoku     = $DB->get_record('sudoku', array('id' => $s), '*', MUST_EXIST);
     $course     = $DB->get_record('course', array('id' => $sudoku->course), '*', MUST_EXIST);
     $cm         = get_coursemodule_from_instance('sudoku', $sudoku->id, $course->id, false, MUST_EXIST);
 } else {
@@ -104,8 +104,7 @@ for ($orow = 0; $orow < 3; $orow++)
     echo "\t</tr>\n";
 }
 echo "</table>\n";
-echo $OUTPUT->heading("Puzzle Code");
-echo $OUTPUT->heading($sudoku->representation);
+echo $OUTPUT->single_button(new moodle_url("start.php", array('id'=>$cm->id)), get_string('start', 'sudoku'));
 
 // Finish the page
 echo $OUTPUT->footer();
