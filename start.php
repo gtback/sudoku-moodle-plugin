@@ -56,7 +56,7 @@ $PAGE->set_context($context);
 
 add_to_log($course->id, "sudoku", "start", "view.php?id=" . $cm->id, "$sudoku->name", $cm->id);
 
-$attempt_id = sudoku_start_puzzle($sudoku, $USER->id);
+$attempt = sudoku_start_puzzle($sudoku, $USER->id);
 //DEBUG
 //$attempt_id = "TEST";
 
@@ -70,8 +70,8 @@ if ($sudoku->intro) { // Conditions to show the intro can change to look for own
 echo $OUTPUT->heading('Starting "' . $sudoku->name . '"');
 
 echo $OUTPUT->heading(get_string('puzzlestarted', 'sudoku'));
-echo $OUTPUT->notification(get_string('puzzlestarteddesc', 'sudoku'));
-echo $OUTPUT->notification($attempt_id . "_" . $USER->id . "_" . $sudoku->representation);
-
+echo '<p>' . get_string('puzzlestarteddesc', 'sudoku') . '</p>';
+echo '<p>' . $attempt->id . "_" . $USER->id . "_" . $sudoku->representation . '</p>';
+echo '<p>You started the puzzle at ' . date("Y-m-d H:i:s",$attempt->starttime) . '.</p>';
 // Finish the page
 echo $OUTPUT->footer();

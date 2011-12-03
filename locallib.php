@@ -51,14 +51,25 @@ defined('MOODLE_INTERNAL') || die();
 function sudoku_start_puzzle($sudoku, $user)
 {
     global $DB;
-    global $SUDOKU_STATUS;
-
-    $record = new stdClass();
-    $record->sudoku_id = $sudoku->id;
-    $record->userid = $user;
-    $record->starttime = time();
-    $record->status = 0; //Incomplete
-    $record->hints_used = 0;
     
-    return $DB->insert_record("sudoku_attempt", $record, true);
+    $attempt = $DB->get_record('sudoku_attempt', 
+            array('sudoku_id' => $sudoku->id, 'userid' => $user), '*');
+    
+    if ($attempt)
+    {
+        return $attempt;
+    }
+    else
+    {
+        $record = new stdClass();
+        $record->sudoku_id = $sudoku->id;
+        $record->userid = $user;
+        $record->starttime = time();
+        $record->status = 0; //Incomplete
+        $record->hints_used = 0;
+
+        $record->id = $DB->insert_record("sudoku_attempt", $record, true);
+
+        return $record;
+    }
 }
