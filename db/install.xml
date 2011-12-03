@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="mod/sudoku/db" VERSION="20111201" COMMENT="XMLDB file for Moodle mod/sudoku"
+<XMLDB PATH="mod/sudoku/db" VERSION="20111202" COMMENT="XMLDB file for Moodle mod/sudoku"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
@@ -40,8 +40,8 @@
     <TABLE NAME="sudoku_strategy" COMMENT="The types of strategies recognized by the system, used to track statistics" PREVIOUS="sudoku_attempt" NEXT="sudoku_move">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="name"/>
-        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="shortname"/>
-        <FIELD NAME="shortname" TYPE="char" LENGTH="30" NOTNULL="true" SEQUENCE="false" PREVIOUS="name"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="description"/>
+        <FIELD NAME="description" TYPE="text" LENGTH="medium" NOTNULL="false" SEQUENCE="false" COMMENT="Help text to display on stategy.php" PREVIOUS="name"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>

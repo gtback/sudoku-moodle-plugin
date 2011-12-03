@@ -42,7 +42,8 @@ $string['pluginname'] = 'sudoku';
 
 $string['invalidsudokuid'] = 'Sudoku ID was incorrect';
 $string['puzzlestarted'] = 'Puzzle Started';
-$string['puzzlecompleted'] = 'Puzzle Completed';
 $string['puzzlestarteddesc'] = 'Please input the following code into the client app to work on puzzle. (This will erase any previous work.)';
+$string['puzzlecompleted'] = 'Puzzle Completed';
 $string['representation'] = 'Puzzle Code';
 $string['start'] = 'Start Puzzle';
+$string['unknownstrategy'] = 'Unknown Strategy code';

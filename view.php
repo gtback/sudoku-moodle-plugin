@@ -106,5 +106,7 @@ for ($orow = 0; $orow < 3; $orow++)
 echo "</table>\n";
 echo $OUTPUT->single_button(new moodle_url("start.php", array('id'=>$cm->id)), get_string('start', 'sudoku'));
 
+echo '<p><a href="' . new moodle_url("/mod/sudoku/strategy.php") . '" target="_blank">Sudoku Strategies</a></p>';
+
 // Finish the page
 echo $OUTPUT->footer();
