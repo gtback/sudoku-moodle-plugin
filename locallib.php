@@ -77,6 +77,8 @@ function sudoku_start_puzzle($sudoku, $user)
 function sudoku_complete_puzzle($attempt_id, $status)
 {
     global $DB;
+    global $SUDOKU_STATUS;
+    
     if (! $attempt = $DB->get_record("sudoku_attempt", array("id"=>$attempt_id))) {
         return "ERROR Invalid Attempt";
     }
@@ -92,6 +94,14 @@ function sudoku_complete_puzzle($attempt_id, $status)
 
     if ($DB->update_record('sudoku_attempt', $attempt))
     {
+        $sudoku = $DB->get_record("sudoku", array("id" => $attempt->sudoku_id), '*', MUST_EXIST);
+        $course = $DB->get_record('course', array('id' => $sudoku->course), '*', MUST_EXIST);
+        $cm = get_coursemodule_from_instance('sudoku', $sudoku->id, $course->id, false, MUST_EXIST);
+        
+        $message = "$sudoku->name - " . $SUDOKU_STATUS[$attempt->status];
+        add_to_log($course->id, "sudoku", "complete", "view.php?id=" . $cm->id, 
+               $message , $cm->id);
+        
         return "OK";
     }
     else
