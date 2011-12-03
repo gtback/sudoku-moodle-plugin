@@ -57,8 +57,6 @@ $PAGE->set_context($context);
 add_to_log($course->id, "sudoku", "start", "view.php?id=" . $cm->id, "$sudoku->name", $cm->id);
 
 $attempt = sudoku_start_puzzle($sudoku, $USER->id);
-//DEBUG
-//$attempt_id = "TEST";
 
 // Output starts here
 echo $OUTPUT->header();
@@ -67,11 +65,32 @@ if ($sudoku->intro) { // Conditions to show the intro can change to look for own
     echo $OUTPUT->box(format_module_intro('sudoku', $sudoku, $cm->id), 'generalbox mod_introbox', 'sudokuintro');
 }
 
-echo $OUTPUT->heading('Starting "' . $sudoku->name . '"');
+echo $OUTPUT->heading($sudoku->name);
 
-echo $OUTPUT->heading(get_string('puzzlestarted', 'sudoku'));
-echo '<p>' . get_string('puzzlestarteddesc', 'sudoku') . '</p>';
-echo '<p>' . $attempt->id . "_" . $USER->id . "_" . $sudoku->representation . '</p>';
+// Show if the puzzle is started or completed.
+if ($attempt->status == 0)
+{
+    echo $OUTPUT->heading(get_string('puzzlestarted', 'sudoku')); 
+}
+else
+{
+    echo $OUTPUT->heading(get_string('puzzlecompleted', 'sudoku')); 
+}
+
+// Show start and (if applicable) end time.
 echo '<p>You started the puzzle at ' . date("Y-m-d H:i:s",$attempt->starttime) . '.</p>';
+if ($attempt->endtime)
+{
+    echo '<p>You finished the puzzle at ' . date("Y-m-d H:i:s",$attempt->endtime) . '.</p>';
+}
+else
+{
+    // Show how to work on the puzzle
+    echo '<p>' . get_string('puzzlestarteddesc', 'sudoku') . '</p>'; 
+    echo '<p>' . $attempt->id . "_" . $USER->id . "_" . $sudoku->representation . '</p>';
+}
+
+echo $OUTPUT->heading('Status: ' . $SUDOKU_STATUS[$attempt->status]);
+
 // Finish the page
 echo $OUTPUT->footer();

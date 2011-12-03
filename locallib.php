@@ -73,3 +73,29 @@ function sudoku_start_puzzle($sudoku, $user)
         return $record;
     }
 }
+
+function sudoku_complete_puzzle($attempt_id, $status)
+{
+    global $DB;
+    if (! $attempt = $DB->get_record("sudoku_attempt", array("id"=>$attempt_id))) {
+        return "ERROR Invalid Attempt";
+    }
+
+    // end time should be null and status should be "in progress"
+    if ($attempt->endtime || $attempt->status != 0)
+    {
+        return "ERROR Puzzle Already Complete";
+    }
+
+    $attempt->endtime = time();
+    $attempt->status = $status;
+
+    if ($DB->update_record('sudoku_attempt', $attempt))
+    {
+        return "OK";
+    }
+    else
+    {
+        return "ERROR Unable to mark puzzle as complete";
+    }
+}
