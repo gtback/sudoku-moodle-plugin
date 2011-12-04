@@ -1,7 +1,7 @@
 <?php
 require_once("$CFG->libdir/externallib.php");
  
-class sudoku_external extends external_api {
+class mod_sudoku_external extends external_api {
  
     public static function start_puzzle_parameters() {
         return new external_function_parameters(
