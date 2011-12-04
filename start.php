@@ -77,17 +77,19 @@ else
     echo $OUTPUT->heading(get_string('puzzlecompleted', 'sudoku')); 
 }
 
-// Show start and (if applicable) end time.
+// Show start time.
 echo '<p>You started the puzzle at ' . date("Y-m-d H:i:s",$attempt->starttime) . '.</p>';
-if ($attempt->endtime)
-{
-    echo '<p>You finished the puzzle at ' . date("Y-m-d H:i:s",$attempt->endtime) . '.</p>';
-}
-else
+echo "<p>You have used $attempt->hints_used hints.</p>";
+
+if (!$attempt->endtime)
 {
     // Show how to work on the puzzle
     echo '<p>' . get_string('puzzlestarteddesc', 'sudoku') . '</p>'; 
     echo '<p>' . $attempt->id . "_" . $USER->id . "_" . $sudoku->representation . '</p>';
+}
+else
+{
+    echo '<p>You finished the puzzle at ' . date("Y-m-d H:i:s",$attempt->endtime) . '.</p>';
 }
 
 echo $OUTPUT->heading('Status: ' . $SUDOKU_STATUS[$attempt->status]);
