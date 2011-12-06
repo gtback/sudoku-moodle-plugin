@@ -189,5 +189,5 @@ function sudoku_log_message($attempt, $log_message, $comment="")
 
     $info = $sudoku->name . $comment;
     add_to_log($course->id, "sudoku", $log_message, "view.php?id=" . $cm->id, 
-           $info , $cm->id);
+           $info , $cm->id, $attempt->userid);
 }
